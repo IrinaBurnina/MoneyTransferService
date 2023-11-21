@@ -16,7 +16,7 @@ public class ClientCard {
     @Size(min = 3, max = 3)
     private final String codeCvv;
     @Setter
-    private int balance;//TODO вывод на рубли, а не на копейки
+    private int balance;
     private final String currency;
 
     public ClientCard(String number, String validTill, String codeCvv, int balance, String currency) {

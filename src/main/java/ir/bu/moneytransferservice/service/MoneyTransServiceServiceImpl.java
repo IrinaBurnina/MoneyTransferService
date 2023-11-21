@@ -133,28 +133,3 @@ public class MoneyTransServiceServiceImpl implements MoneyTransferServiceService
                 '}';
     }
 }
-//200*10/100=20
-////arrange
-//        operation.setOperationId("1");
-//        TransferOperation operation1NullId = new TransferOperation(operation.getCardFrom(),
-//                operation.getCardToNumber(),
-//                operation.getAmount(),
-//                (float) 10,
-//                "0000");
-//
-//        Mockito.when(repository.getBankCardByNumber("4000001234567899")).thenReturn(card);
-//        Mockito.when(repository.createOperation(operation1NullId)).thenReturn(operation);
-//
-//        TransferOperationDTO transferOperationDTO = new TransferOperationDTO("4000001234567899",
-//                "10/25",
-//                "123",
-//                "123456789123456",
-//                new Amount(1000, "RUB"));
-//
-//        MoneyTransferService service = new MoneyTransferServiceImpl(generator, repository, logger);
-//
-//        OperationDTO operationDTOExpect = new OperationDTO("1");
-//        //act
-//        OperationDTO operationDTOActual = service.transfer(transferOperationDTO);
-//        //assert
-//        Assertions.assertEquals(operationDTOExpect, operationDTOActual);
