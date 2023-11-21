@@ -1,5 +1,8 @@
 package ir.bu.moneytransferservice.model.dto;
 
+import lombok.Getter;
+
+@Getter
 public class ErrorDtoResponses {
     private final String msg;
     private final int id;
@@ -7,14 +10,6 @@ public class ErrorDtoResponses {
     public ErrorDtoResponses(String msg, int id) {
         this.msg = msg;
         this.id = id;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public int getId() {
-        return id;
     }
 
     @Override
