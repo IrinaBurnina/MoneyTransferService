@@ -14,9 +14,9 @@ public class ErrorDtoResponses {
 
     @Override
     public String toString() {
-        return "ErrorDtoResponses{" +
-                "msg='" + msg + '\'' +
-                ", id=" + id +
+        return " ErrorDtoResponses{" +
+                " msg= '" + msg + '\'' +
+                ", id= " + id +
                 '}';
     }
 }

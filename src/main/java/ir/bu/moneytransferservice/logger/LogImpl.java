@@ -36,7 +36,7 @@ public class LogImpl implements Log {
     @Override
     public void log(Object o, String msg) {
         freq.put(o.toString(), counterForLogs.getAndIncrement());
-        String textLine = " # " + freq.get(o.toString()) + "[" + LocalDateTime.now() + " ] " +
+        String textLine = " # " + freq.get(o.toString()) + " [ " + LocalDateTime.now() + " ] " +
                 " === " + o + "  ===  " + msg;
         try (FileOutputStream fos = new FileOutputStream(fileLogName, true)) {
             byte[] bytes = (textLine + "\n").getBytes();

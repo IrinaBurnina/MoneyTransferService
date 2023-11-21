@@ -44,7 +44,7 @@ public class MoneyTransServRepositoryImpl implements MoneyTransferServiceReposit
             numbersOfRecipients.add(newTransfer.getCardToNumber());
             return newTransfer;
         } else {
-            throw new AttemptOfRepeatOperation("It's trying of repeated operation");
+            throw new AttemptOfRepeatOperation("It's trying of repeated operation ");
         }
     }
 
@@ -126,8 +126,6 @@ public class MoneyTransServRepositoryImpl implements MoneyTransferServiceReposit
             for (int i = start; i < end + 1; i++) {
                 operationsInInterval.put(String.valueOf(i), operations.get(String.valueOf(i)));
             }
-        } else {
-            //TODO выброс ошибки параметров метода
         }
         return operationsInInterval;
     }

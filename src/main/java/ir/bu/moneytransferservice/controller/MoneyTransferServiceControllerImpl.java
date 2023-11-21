@@ -27,9 +27,9 @@ public class MoneyTransferServiceControllerImpl implements MoneyTransferServiceC
     public OperationDtoResponses confirm(@RequestBody OperationDtoForConfirm operationDtoForConfirm) {
         return service.confirm(operationDtoForConfirm);
     }
-
-    @GetMapping("/ping")
-    public String ping() {
-        return "OK";
-    }
+//
+//    @GetMapping("/ping")
+//    public String ping() {
+//        return "OK";
+//    }
 }
