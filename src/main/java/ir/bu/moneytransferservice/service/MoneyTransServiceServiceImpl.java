@@ -129,7 +129,7 @@ public class MoneyTransServiceServiceImpl implements MoneyTransferServiceService
         return "MoneyTransServiceServiceImpl{" +
                 "repository=" + repository +
                 ", logger=" + logger +
-                ", fee=" + fee +
+                ", fee =" + fee +
                 '}';
     }
 }
