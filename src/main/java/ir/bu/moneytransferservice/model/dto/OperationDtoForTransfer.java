@@ -17,8 +17,8 @@ public class OperationDtoForTransfer {
     @Setter
     private String cardFromCVV;
 
-    public OperationDtoForTransfer(String cardFromNumber, String cardFromValidTill, String cardFromCVV,
-                                   String cardToNumber, Amount amount) {
+    public OperationDtoForTransfer(String cardFromNumber, String cardToNumber, String cardFromCVV,
+                                   String cardFromValidTill, Amount amount) {
         this.cardFromNumber = cardFromNumber;
         this.cardToNumber = cardToNumber;
         this.amount = amount;
@@ -36,5 +36,4 @@ public class OperationDtoForTransfer {
                 ", cardFromCVV='" + cardFromCVV + '\'' +
                 '}';
     }
-
 }

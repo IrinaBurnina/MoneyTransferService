@@ -3,16 +3,16 @@ package ir.bu.moneytransferservice.controller;
 import ir.bu.moneytransferservice.model.dto.OperationDtoForConfirm;
 import ir.bu.moneytransferservice.model.dto.OperationDtoForTransfer;
 import ir.bu.moneytransferservice.model.dto.OperationDtoResponses;
-import ir.bu.moneytransferservice.service.MoneyTransServiceServiceImpl;
+import ir.bu.moneytransferservice.service.MoneyTransferServiceService;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "https://serp-ya.github.io", maxAge = 3600)
 @RestController
-@RequestMapping("")
+@RequestMapping("/transfer")
 public class MoneyTransferServiceControllerImpl implements MoneyTransferServiceController {
-    private final MoneyTransServiceServiceImpl service;
+    private final MoneyTransferServiceService service;
 
-    public MoneyTransferServiceControllerImpl(MoneyTransServiceServiceImpl service) {
+    public MoneyTransferServiceControllerImpl(MoneyTransferServiceService service) {
         this.service = service;
     }
 
@@ -27,9 +27,4 @@ public class MoneyTransferServiceControllerImpl implements MoneyTransferServiceC
     public OperationDtoResponses confirm(@RequestBody OperationDtoForConfirm operationDtoForConfirm) {
         return service.confirm(operationDtoForConfirm);
     }
-//
-//    @GetMapping("/ping")
-//    public String ping() {
-//        return "OK";
-//    }
 }

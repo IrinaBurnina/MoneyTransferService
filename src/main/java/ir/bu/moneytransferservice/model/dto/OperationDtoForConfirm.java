@@ -4,18 +4,22 @@ import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 public class OperationDtoForConfirm {
-    @Getter
     private String operationId;
-    @Getter
-    private String verificationCode;
+    private String code;
 
-    public OperationDtoForConfirm(String operationId, String verificationCode) {
+    public OperationDtoForConfirm(String operationId, String code) {
         this.operationId = operationId;
-        this.verificationCode = verificationCode;
+        this.code = code;
     }
 
-    public OperationDtoForConfirm() {
+    public void setOperationId(String operationId) {
+        this.operationId = operationId;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
@@ -29,5 +33,13 @@ public class OperationDtoForConfirm {
     @Override
     public int hashCode() {
         return Objects.hash(operationId);
+    }
+
+    @Override
+    public String toString() {
+        return "OperationDtoForConfirm{" +
+                "operationId='" + operationId + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }

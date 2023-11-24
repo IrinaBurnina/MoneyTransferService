@@ -4,4 +4,4 @@ services:
   mts:
     image: 'myapp:latest'
     ports:
-      - '5500'
+      - '5500:5500'

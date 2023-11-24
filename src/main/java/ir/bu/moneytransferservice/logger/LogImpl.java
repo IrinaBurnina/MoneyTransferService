@@ -1,5 +1,6 @@
 package ir.bu.moneytransferservice.logger;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -13,8 +14,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class LogImpl implements Log {
     private static Log INSTANCE = null;
-    private Map<String, Integer> freq = new ConcurrentHashMap<>();
-    private AtomicInteger counterForLogs = new AtomicInteger(1);
+    private final Map<String, Integer> freq = new ConcurrentHashMap<>();
+    private final AtomicInteger counterForLogs = new AtomicInteger(1);
+    @Value("logTest.txt")
     String fileLogName = "log.txt";
 
     LogImpl() throws IOException {
@@ -36,7 +38,7 @@ public class LogImpl implements Log {
     @Override
     public void log(Object o, String msg) {
         freq.put(o.toString(), counterForLogs.getAndIncrement());
-        String textLine = " # " + freq.get(o.toString()) + " [ " + LocalDateTime.now() + " ] " +
+        String textLine = " # ID=" + freq.get(o.toString()) + " [ " + LocalDateTime.now() + " ] " +
                 " === " + o + "  ===  " + msg;
         try (FileOutputStream fos = new FileOutputStream(fileLogName, true)) {
             byte[] bytes = (textLine + "\n").getBytes();

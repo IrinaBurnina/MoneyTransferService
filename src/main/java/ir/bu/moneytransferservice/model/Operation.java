@@ -5,22 +5,16 @@ import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter
 public class Operation {
-    @Getter
     private final String id;
-    @Getter
     private final ClientCard cardFromNumber;
-    @Getter
     private final String cardToNumber;
-    @Getter
     private final Amount amount;
-    @Getter
     @Setter
     private Amount fee;
-    @Getter
     @Setter
     private OperationStatus operationStatus;
-    @Getter
     @Setter
     private String verificationCode;
 

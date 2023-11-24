@@ -12,7 +12,7 @@ public class Amount {
     @Setter
     private String currency;
 
-    public Amount(int value, String currency) {
+    public Amount(String currency, int value) {
         this.value = value;
         this.currency = currency;
     }

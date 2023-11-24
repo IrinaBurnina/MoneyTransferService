@@ -1,13 +1,13 @@
 package ir.bu.moneytransferservice;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.test.context.TestConfiguration;
 
-@SpringBootTest
+@TestConfiguration(proxyBeanMethods = false)
 class MoneyTransferServiceServiceApplicationTests {
 
-    @Test
-    void contextLoads() {
+    public static void main(String[] args) {
+        SpringApplication.from(MoneyTransferServiceApplication::main).with(MoneyTransferServiceServiceApplicationTests.class).run(args);
     }
 
 }
