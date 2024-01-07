@@ -1,12 +1,13 @@
 package ir.bu.moneytransferservice.controller;
 
-import ir.bu.moneytransferservice.model.dto.OperationDtoForConfirm;
-import ir.bu.moneytransferservice.model.dto.OperationDtoForTransfer;
-import ir.bu.moneytransferservice.model.dto.OperationDtoResponses;
+import ir.bu.moneytransferservice.dto.OperationDtoForConfirm;
+import ir.bu.moneytransferservice.dto.OperationDtoForTransfer;
+import ir.bu.moneytransferservice.dto.OperationDtoResponses;
+import org.springframework.http.ResponseEntity;
 
 public interface MoneyTransferServiceController {
-    OperationDtoResponses transfer(OperationDtoForTransfer operationDtoForTransfer);
+    ResponseEntity<OperationDtoResponses> transfer(OperationDtoForTransfer operationDtoForTransfer);
 
-    OperationDtoResponses confirm(OperationDtoForConfirm operationDtoForConfirm);
+    ResponseEntity<OperationDtoResponses> confirm(OperationDtoForConfirm operationDtoForConfirm);
 
 }

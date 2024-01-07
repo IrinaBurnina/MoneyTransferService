@@ -1,4 +1,4 @@
-package ir.bu.moneytransferservice.exception;
+package ir.bu.moneytransferservice.exception.errors;
 
 import lombok.Getter;
 

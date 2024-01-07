@@ -1,13 +1,11 @@
-package ir.bu.moneytransferservice;
+package ir.bu.moneytransferservice.repository;
 
+import ir.bu.moneytransferservice.dto.OperationDtoForTransfer;
 import ir.bu.moneytransferservice.exception.AttemptOfRepeatOperation;
 import ir.bu.moneytransferservice.model.Amount;
 import ir.bu.moneytransferservice.model.ClientCard;
 import ir.bu.moneytransferservice.model.Operation;
 import ir.bu.moneytransferservice.model.OperationStatus;
-import ir.bu.moneytransferservice.model.dto.OperationDtoForTransfer;
-import ir.bu.moneytransferservice.repository.MoneyTransServRepositoryImpl;
-import ir.bu.moneytransferservice.repository.MoneyTransferServiceRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
@@ -16,19 +14,19 @@ public class MoneyTransferServiceRepositoryImplTests {
     MoneyTransferServiceRepository repository = new MoneyTransServRepositoryImpl();
     ClientCard cardFrom = new ClientCard("2222111133334444",
             "12/25",
-            "123", 1000, "RUR");
+            "123", 10000, "RUR");
     String cardToNumber = "1111222233334444";
     OperationDtoForTransfer operationDtoForTransfer = new OperationDtoForTransfer(
             cardFrom.getNumber(),
             cardFrom.getValidTill(),
             cardFrom.getCodeCvv(),
             cardToNumber,
-            new Amount("RUR", 100));
+            new Amount(100, "RUR"));
     Operation expected = new Operation(
             "1",
             cardFrom, cardToNumber,
-            new Amount("RUR", 100),
-            new Amount("RUR", 1),
+            new Amount(100, "RUR"),
+            new Amount(1, "RUR"),
             OperationStatus.CREATED,
             "0000");
 

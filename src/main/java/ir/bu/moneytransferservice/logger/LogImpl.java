@@ -16,7 +16,7 @@ public class LogImpl implements Log {
     private static Log INSTANCE = null;
     private final Map<String, Integer> freq = new ConcurrentHashMap<>();
     private final AtomicInteger counterForLogs = new AtomicInteger(1);
-    @Value("logTest.txt")
+    @Value("log.txt")
     String fileLogName = "log.txt";
 
     LogImpl() throws IOException {

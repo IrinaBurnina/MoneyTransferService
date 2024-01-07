@@ -1,9 +1,9 @@
 package ir.bu.moneytransferservice;
 
+import ir.bu.moneytransferservice.dto.OperationDtoForConfirm;
+import ir.bu.moneytransferservice.dto.OperationDtoForTransfer;
+import ir.bu.moneytransferservice.dto.OperationDtoResponses;
 import ir.bu.moneytransferservice.model.Amount;
-import ir.bu.moneytransferservice.model.dto.OperationDtoForConfirm;
-import ir.bu.moneytransferservice.model.dto.OperationDtoForTransfer;
-import ir.bu.moneytransferservice.model.dto.OperationDtoResponses;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,9 +35,9 @@ class TestContainersApplicationTests {
     public void myAppMtsTransferTest() {
         //arrange
         OperationDtoForTransfer operationDtoForTransfer = new OperationDtoForTransfer(
-                "2222111133334444", "1111222233334444",
-                "123", "12/25",
-                new Amount("RUR", 100));
+                "2222111133334444", "12/25",
+                "123", "1111222233334444",
+                new Amount(100, "RUR"));
         String url = "http://localhost:" + myAppMts.getMappedPort(5500) + "/transfer/transfer";
         OperationDtoResponses expected = new OperationDtoResponses("1");
         //act
@@ -56,15 +56,15 @@ class TestContainersApplicationTests {
         OperationDtoForTransfer operationDtoForTransfer = new OperationDtoForTransfer(
                 "2222111133334444", "1111222233334444",
                 "123", "12/25",
-                new Amount("RUR", 100));
+                new Amount(100, "RUR"));
         String urlTransfer = "http://localhost:" + myAppMts.getMappedPort(5500) + "/transfer";
         ResponseEntity<OperationDtoResponses> entityFromMyAppMts = restTemplate.postForEntity(urlTransfer,
                 operationDtoForTransfer,
                 OperationDtoResponses.class);
         OperationDtoResponses operationResponse = entityFromMyAppMts.getBody();
         assert operationResponse != null;
-        OperationDtoForConfirm operationDtoForConfirm = new OperationDtoForConfirm(operationResponse.getOperationId(), "0000");
-        OperationDtoResponses expected = new OperationDtoResponses(operationResponse.getOperationId());
+        OperationDtoForConfirm operationDtoForConfirm = new OperationDtoForConfirm(operationResponse.operationId(), "0000");
+        OperationDtoResponses expected = new OperationDtoResponses(operationResponse.operationId());
         String urlConfirm = "http://localhost:" + myAppMts.getMappedPort(5500) + "/confirmOperation";
         //act
         ResponseEntity<OperationDtoResponses> entityForConfirming = restTemplate.postForEntity(urlConfirm,

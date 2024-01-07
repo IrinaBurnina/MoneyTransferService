@@ -1,26 +1,30 @@
 package ir.bu.moneytransferservice.repository;
 
-import ir.bu.moneytransferservice.confirmTransfer.VerificationCode;
+import ir.bu.moneytransferservice.dto.OperationDtoForTransfer;
 import ir.bu.moneytransferservice.exception.AttemptOfRepeatOperation;
 import ir.bu.moneytransferservice.model.*;
-import ir.bu.moneytransferservice.model.dto.OperationDtoForTransfer;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class MoneyTransServRepositoryImpl implements MoneyTransferServiceRepository {
 
-    private static Map<String, Operation> operations;
+    private final Map<String, Operation> operations;
     @Getter
     private final Map<String, ClientCard> clientCards;
     private final AtomicLong counter = new AtomicLong(1);
-    private int fee;
+    public int code;
+    @Getter
+    @Value("${repository.fee}")
+    private int fee = 1;
 
 
     public MoneyTransServRepositoryImpl() {
@@ -33,17 +37,29 @@ public class MoneyTransServRepositoryImpl implements MoneyTransferServiceReposit
 
     @Override
     public Operation createTransfer(OperationDtoForTransfer operationDtoForTransfer) {
+        Amount amount = operationDtoForTransfer.getAmount();
         Operation newTransfer = new Operation(
                 String.valueOf(counter.getAndIncrement()), clientCards.get(operationDtoForTransfer.getCardFromNumber()),
                 operationDtoForTransfer.getCardToNumber(),
-                operationDtoForTransfer.getAmount(), new Amount(operationDtoForTransfer.getAmount().getCurrency(), fee),
-                OperationStatus.CREATED, new VerificationCode().getCode());
+                amount, calculateFee(amount),
+                OperationStatus.CREATED, generateCode());
         if (!operations.containsKey(newTransfer.getId())) {
             operations.put(newTransfer.getId(), newTransfer);
             return newTransfer;
         } else {
             throw new AttemptOfRepeatOperation("It's trying of repeat operation ");
         }
+    }
+
+    public String generateCode() {
+        code = ThreadLocalRandom.current().nextInt(1000, 10000);
+        return String.valueOf(code);
+    }
+
+    @Override
+    public Amount calculateFee(Amount amount) {
+        int valueOfFee = amount.value() * fee / 100;
+        return new Amount(valueOfFee, amount.currency());
     }
 
     @Override
@@ -54,7 +70,7 @@ public class MoneyTransServRepositoryImpl implements MoneyTransferServiceReposit
     @Override
     public Optional<Operation> getOperationById(String id) {
         if (operations.containsKey(id)) {
-            return Optional.ofNullable(operations.get(id));
+            return Optional.of(operations.get(id));
         }
         return Optional.empty();
     }
@@ -99,8 +115,7 @@ public class MoneyTransServRepositoryImpl implements MoneyTransferServiceReposit
 
     @Override
     public ConfirmOperation confirmOperation(Operation operation) {
-        VerificationCode code = new VerificationCode();
-        return new ConfirmOperation(operation.getId(), code.getCode());
+        return new ConfirmOperation(operation.getId(), String.valueOf(code));
     }
 
     @Override

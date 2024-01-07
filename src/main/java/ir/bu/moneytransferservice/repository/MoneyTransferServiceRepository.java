@@ -1,9 +1,10 @@
 package ir.bu.moneytransferservice.repository;
 
+import ir.bu.moneytransferservice.dto.OperationDtoForTransfer;
+import ir.bu.moneytransferservice.model.Amount;
 import ir.bu.moneytransferservice.model.ClientCard;
 import ir.bu.moneytransferservice.model.ConfirmOperation;
 import ir.bu.moneytransferservice.model.Operation;
-import ir.bu.moneytransferservice.model.dto.OperationDtoForTransfer;
 
 import java.util.Map;
 import java.util.Optional;
@@ -32,6 +33,8 @@ public interface MoneyTransferServiceRepository {
     Map<String, ClientCard> getClientCards();
 
     ConfirmOperation confirmOperation(Operation operation);
+
+    Amount calculateFee(Amount amount);
 
     Map<String, Operation> getByCardSender(ClientCard card);
 
